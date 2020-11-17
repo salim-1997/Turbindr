@@ -1,2 +1,3 @@
-# Projekt team 7
+# Projekt Turbindr
+
 

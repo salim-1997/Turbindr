@@ -1,0 +1,41 @@
+h1{
+  margin-bottom: 25px;
+
+  font-family: Andale Mono,AndaleMono,monospace;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: white;
+    padding: 20px 20px 0 20px;
+    font-size: 20px;
+    font-family: Andale Mono,AndaleMono,monospace;
+    border-width: 2px;
+    border-color: black;
+  }
+
+
+#title-section{
+  text-align: center;
+  color: black;
+  background-color: #a5ecd7;
+  padding: 30px 30px 0 30px;
+}
+
+.brandName{
+  font-family: Papyrus,fantasy;
+  font-size: 35px;
+}
+#main-section{
+  background-color: #e8ffc1;
+  padding: 30px 30px 0 30px
+}
+.turbine-img{
+  width: 400px;
+  height: 500px;
+}
+.img-col{
+  text-align: center;
+}
+.text-paragraph{
+  margin: 100px;
+}

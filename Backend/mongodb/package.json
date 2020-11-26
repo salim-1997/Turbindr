@@ -3,6 +3,11 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "sonar-scanner": "node_modules/sonar-scanner/bin/sonar-scanner"
+  },
+
+  "devDependencies": {
+    "sonarqube-scanner": "^2.5.0",
     "start": "node bin\/www"
   },
   "dependencies": {
@@ -16,3 +21,5 @@
     "serve-favicon": "^2.3.2"
   }
 }
+
+

@@ -1,0 +1,49 @@
+#!groovy
+
+properties ([
+    [$class: 'GitLabConnectionProperty', gitLabConnection: 'htw'],
+    buildDiscarder(logRotator(numToKeepStr: '10'))
+    ])
+
+timeout(time: 120, unit: 'MINUTES') {
+
+ansiColor('css') {
+
+stage ('Build') { 
+
+    node { 
+
+        checkout scm
+    
+        try {
+
+            withMaven(
+                    maven: 'maven-3',
+                    mavenOpts: '-Xmx1024m', 
+                    options: [artifactsPublisher(disabled: true),
+                            jacocoPublisher(disabled: true)],
+                    jdk: 'openjdk1.8'
+                    )
+            {
+                sh 'mvn -DskipTests clean install' 
+
+                def pom = readMavenPom file: 'pom.xml'
+                sh "java -jar target/${pom.artifactId}-${pom.version}.jar"
+            }
+
+            echo "\u2713 success"
+            currentBuild.result = 'SUCCESS' 
+
+        } catch (any) {
+            echo "\u274C failure"
+            currentBuild.result = 'FAILURE' 
+            throw any //rethrow exception to prevent the build from proceeding
+        }
+
+    }
+
+}
+}
+}
+
+// vim: ft=groovy

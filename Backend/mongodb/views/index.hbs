@@ -1,5 +1,7 @@
 
   <body>
+<body style="background-color:darkblue;">
+
     <div id="title-section" >
     <h1>Windkraftanlagen des Landes Brandenburg</h1>
     <nav class="navbar navbar-expand-lg navbar-dark navigationBar" style="padding-left: 0;">
@@ -45,14 +47,42 @@
     <a href="/get-data">LOAD DATA</a>
     <div>
         {{# each items }}
+
             <article class="item">
-                <div>Betreiber: {{ this.Betreiber }}</div>
+                <div>ID: {{ this._id }}</div>
+                <div>Betreiber: {{ this.[Betreiber,C,120] }}</div>
+                <div>Bst_Nr: {{ this.[Bst_Nr,C,11] }}</div>
+                <div>Bst_Name: {{ this.[Bst_Name,C,120] }}</div>
+                <div>Ort: {{ this.[Ort,C,254] }}</div>
+                <div>Ortsteil: {{ this.[Ortsteil,C,254] }}</div>
+                <div>Anl_Nr: {{ this.[Anl_Nr,C,9] }}</div>
+                <div>Anl_Bez: {{ this.[Anl_Bez,C,60] }}</div>
+                <div>Genehmigt: {{ this.[Genehmigt,D] }}</div>
+                <div>Ostwert: {{ this.[Ostwert,N,8,0] }}</div>
+                <div>Nordwert: {{ this.[Nordwert,N,7,0] }}</div>
                 <div>Latitude: {{ this.Latitude }}</div>
                 <div>Longitude: {{ this.Longitude }}</div>
-                <div>ID: {{ this._id }}</div>
+                <div>Kreis: {{ this.[Kreis,C,40] }}</div>
+                <div>Geme_Kenn: {{ this.[Geme_Kenn,C,8] }}</div>
+                <div>PLZ: {{ this.[PLZ,C,5] }}</div>
+                <div>Inbetriebnahme: {{ this.[Inbetriebn,D] }}</div>
+                <div>Alt_an_anz: {{ this.[Alt_an_anz,D] }}</div>
+                <div>Leistung: {{ this.[Leistung,N,13,3] }}</div>
+                <div>Status: {{ this.[Status,C,20] }}</div>
+                <div>Nabenhoehe: {{ this.[Nabenhoehe,N,11,2] }}</div>
+                <div>Rotordurchmesser: {{ this.[Rotordurch,N,11,2] }}</div>
+                <div>LW_Tag: {{ this.[LW_TAG,N,11,2] }}</div>
+                <div>LW_Nacht: {{ this.[LW_Nacht,N,11,2] }}</div>
+                <div>Stand_Abw: {{ this.[Stand_Abw,N,11,2] }}</div>
+                <div>Wka_ID: {{ this.[Wka_ID,C,15] }}</div>
+              
+
+
             </article>
         {{/each}}
+
     </div>
 </section>
+
   </body>
 

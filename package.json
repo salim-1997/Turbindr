@@ -8,7 +8,7 @@
   },
 
   "devDependencies": {
-    "sonarqube-scanner": "^2.5.0"
+    "sonar-scanner": "^3.1.0"
   },
   "dependencies": {
     "body-parser": "~1.13.2",

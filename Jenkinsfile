@@ -19,7 +19,6 @@ stage ('Build') {
         try {
 
             sh 'npm install'
-            sh 'npm run build'
 
             echo "\u2713 success"
             currentBuild.result = 'SUCCESS'

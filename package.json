@@ -3,7 +3,6 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "build": "git@www.robert-magnus.de:htw/Turbindr/projekt-team-7.git",
     "start": "node bin\/www",
     "sonar-scanner": "node_modules/sonar-scanner/bin/sonar-scanner"
   },

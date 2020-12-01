@@ -1,0 +1,9 @@
+img {
+    float:right;
+    width: 40%;
+}
+h3 {
+    margin: 35px;
+    width: 40%;
+    display: inline-block;
+}

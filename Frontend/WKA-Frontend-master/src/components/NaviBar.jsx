@@ -9,7 +9,7 @@ function NaviBar(){
   <input type="text" placeholder="PLZ.."></input>
   <Link to="/karte"><a>Karte</a></Link>
   <Link to="/details"><a>Details</a></Link>
-  <Link to="/statistik"><a>Stastik</a></Link>
+  <Link to="/statistik"><a>Statistik</a></Link>
   <Link to="/info"><a>Info</a></Link>
   <Link to="/kontakt"><a>Kontakt</a></Link>
  </div>

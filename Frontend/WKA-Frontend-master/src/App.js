@@ -16,7 +16,7 @@ function App() {
     <Switch>
     <Route path="/karte" component={Karte} />
     <Route path="/details" component={DetailsPage} />
-    <Route path="/statik" component={StatisticsPage} />
+    <Route path="/statistik" component={StatisticsPage} />
     <Route path="/info" component={InfoPage} />
     <Route path="/kontakt" component={KontaktPage} />
     </Switch>

@@ -14,7 +14,7 @@ class Karte extends Component {
       super();
       this.state = {
           positions : [],
-          zoom:15
+          zoom:8
       };
   }
   componentDidMount = () => {
@@ -22,11 +22,13 @@ class Karte extends Component {
     .then((response) =>{
      this.setState({positions : response.data});
      console.log('succes: data has been received');
+     console.log(this.state.positions[0].Longitude); // hier funktioniert es
     })
     .catch(() => {
       alert("data haven't been received!" )
     });
     };
+    
     
     grenIcon = L.icon({
       iconUrl: leafGreen,
@@ -59,26 +61,32 @@ class Karte extends Component {
     });
 
    createMarker(marker){
-          
-      return <Marker position = {[marker.Longitude, marker.Latitude]} icon={this.redIcon}>
+      return <Marker position = {[marker.Latitude, marker.Longitude]} icon={
+        L.icon({
+      iconUrl: leafRed,
+      shadowUrl: leafShadow,
+      iconSize:     [38, 95], // size of the icon
+      shadowSize:   [50, 64], // size of the shadow
+      iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+      shadowAnchor: [4, 62],  // the same for the shadow
+      popupAnchor:  [-3, -86]
+    })} >
                <Popup>
                I am a red leaf
                </Popup>
              </Marker>
-     
   }  
     
     render(){
-     
+       //console.log(this.state.positions[0].Longitude); //hier funktioniert es nicht(TypeError: Cannot read property 'Longitude' of undefined)
         return (
           <div>
-          <MapContainer className="map" center={[52.7896428, 13.42037676]} zoom={this.state.zoom}>
+          <MapContainer className="map" center={[52.45905,13.01582]} zoom={this.state.zoom}>
             <TileLayer
               attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-            {this.state.positions.map(createMarker)}
-               
+            {this.state.positions.map(this.createMarker)}
           </MapContainer>
           <SortierPanel />
           </div>

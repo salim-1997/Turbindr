@@ -5,7 +5,8 @@ class StatisticsPage extends React.Component{
     constructor(){
         super();
         this.state = {
-            positions : []
+            latitude : [],
+            longitude : []
         };
     }
     componentDidMount = () => {
@@ -17,9 +18,9 @@ class StatisticsPage extends React.Component{
         axios.get('/coordinates')
         .then((response) =>{
          const data = response.data;
-         this.setState({positions : data});
+         this.setState({latitude : response.data});
          console.log('succes: data has been received');
-         //console.log(this.state.positions);
+         console.log(response.data[0].Latitude);
         })
         .catch(() => {
           alert("data haven't been received!" )

@@ -18,7 +18,7 @@ const wkaSchema = new mongoose.Schema({
 const Wka = mongoose.model('Wka', wkaSchema);
 
 app.get('/coordinates', async function(req,res){
-    Wka.find({},{_id: 1, Longitude :1 ,Latitude:1},function(err,foundItems){
+    Wka.find({},{_id: 1, Longitude :1 ,Latitude:1, "Status,C,20": 1},function(err,foundItems){
         res.send(foundItems);
    });
 

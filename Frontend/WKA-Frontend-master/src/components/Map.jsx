@@ -1,4 +1,4 @@
-import React ,{Component}from 'react'
+import React ,{useEffect, useState}from 'react'
 import L from 'leaflet';
 import {MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import axios from "axios";
@@ -7,30 +7,20 @@ import leafRed from '../assets/leaf-red.png';
 import leafOrange from '../assets/leaf-orange.png';
 import leafShadow from '../assets/leaf-shadow.png';
 import "./Map.css";
-import SortierPanel from "./SortierPanel";
-class Karte extends Component {
-    
-    constructor(){
-      super();
-      this.state = {
-          positions : [],
-          zoom:8
-      };
-  }
-  componentDidMount = () => {
+function Karte(props) {
+   const[positions, setPositions] = useState([]);
+   useEffect(() =>{
     axios.get('/coordinates')
-    .then((response) =>{
-     this.setState({positions : response.data});
-     console.log('succes: data has been received');
-     console.log(this.state.positions[0].Longitude); // hier funktioniert es
-    })
-    .catch(() => {
-      alert("data haven't been received!" )
-    });
-    };
-    
-    
-    grenIcon = L.icon({
+      .then((res) =>{
+       setPositions(res.data);
+       console.log('succes: data has been received');
+      })
+      .catch(() => {
+        alert("data haven't been received!" )
+      })
+   },[]);
+
+    const grenIcon = L.icon({
       iconUrl: leafGreen,
       shadowUrl: leafShadow,
       iconSize:     [38, 95], // size of the icon
@@ -40,7 +30,7 @@ class Karte extends Component {
       popupAnchor:  [-3, -76]
     });
   
-    redIcon = L.icon({
+    const redIcon = L.icon({
       iconUrl: leafRed,
       shadowUrl: leafShadow,
       iconSize:     [38, 95], // size of the icon
@@ -50,7 +40,7 @@ class Karte extends Component {
       popupAnchor:  [-3, -86]
     });
   
-    orangeIcon = L.icon({
+    const orangeIcon = L.icon({
       iconUrl: leafOrange,
       shadowUrl: leafShadow,
       iconSize:     [38, 95], // size of the icon
@@ -59,39 +49,28 @@ class Karte extends Component {
       shadowAnchor: [4, 62],  // the same for the shadow
       popupAnchor:  [-3, -86]
     });
-
-   createMarker(marker){
-      return <Marker position = {[marker.Latitude, marker.Longitude]} icon={
-        L.icon({
-      iconUrl: leafRed,
-      shadowUrl: leafShadow,
-      iconSize:     [38, 95], // size of the icon
-      shadowSize:   [50, 64], // size of the shadow
-      iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
-      shadowAnchor: [4, 62],  // the same for the shadow
-      popupAnchor:  [-3, -86]
-    })} >
+  
+   function createMarker(marker){
+      if (marker["Status,C,20"] === props.status){
+   
+      return <Marker position = {[marker.Latitude, marker.Longitude]} icon={grenIcon} >
                <Popup>
                I am a red leaf
                </Popup>
              </Marker>
-  }  
-    
-    render(){
-       //console.log(this.state.positions[0].Longitude); //hier funktioniert es nicht(TypeError: Cannot read property 'Longitude' of undefined)
+  } };
         return (
           <div>
-          <MapContainer className="map" center={[52.45905,13.01582]} zoom={this.state.zoom}>
+          <MapContainer className="map" center={[52.45905,13.01582]} zoom={9}>
             <TileLayer
               attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-            {this.state.positions.map(this.createMarker)}
+            {positions.map(createMarker)}
           </MapContainer>
-          <SortierPanel />
           </div>
         );
-      }}
+      }
     
     
   

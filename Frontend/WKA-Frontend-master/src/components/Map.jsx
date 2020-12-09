@@ -53,9 +53,9 @@ function Karte(props) {
    function createMarker(marker){
       if (marker["Status,C,20"] === props.status){
    
-      return <Marker position = {[marker.Latitude, marker.Longitude]} icon={grenIcon} >
+      return <Marker onClick={()=>{console.log(marker.Latitude)}}position = {[marker.Latitude, marker.Longitude]} icon={grenIcon} >
                <Popup>
-               I am a red leaf
+               Selected !
                </Popup>
              </Marker>
       }}

@@ -31,6 +31,17 @@ app.get('/', async function (req,res){
     });
 });
 
+app.route('/:givenId').
+get(function (req,res){
+    Wka.findOne({_id: req.params.givenId},function(req,foundWka){
+    if(foundWka){
+        res.send(foundWka);
+    }
+    else {
+        res.send("wka doesn't exist");
+    }
+    })
+})
 app.listen(5000, function(){
     console.log("server listening on Port 5000..");
 })

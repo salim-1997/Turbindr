@@ -1,7 +1,19 @@
-import React from "react";
+import React , {useState , useEffect} from "react";
+import axios from "axios";
 import "./DetailsPage.css"
 function DetailsPage(){
-  
+  const[wkaInfo, setWkaInfo] = useState([]);
+   useEffect(() =>{
+    axios.get('/5f7249efabc82db972909544')
+      .then((response) =>{
+       setWkaInfo(response.data);
+       console.log('succes: data has been received');
+       console.log(response.data);
+      })
+      .catch(() => {
+        alert("data haven't been received!" )
+      })
+   },[]);
     return <table>
     <tr>
       <th>Betreiber</th>

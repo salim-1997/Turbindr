@@ -58,7 +58,19 @@ function Karte(props) {
                I am a red leaf
                </Popup>
              </Marker>
+<<<<<<< HEAD
   } };
+=======
+  }  
+    
+    render(){
+        // Zusatz Herr Trzewik - START
+        console.log(this.state); // sollte nach Ihren Angaben funktionieren und
+        console.log(this.state.positions); // wahrscheinlich ist dieses Objekt nicht initialisiert... Warum nicht?
+        // Zusatz Herr Trzewik - END
+
+        console.log(this.state.positions[0].Longitude); //hier funktioniert es nicht(TypeError: Cannot read property 'Longitude' of undefined)
+>>>>>>> dc36bc131c5c648642c4dd2796472b956c581cd6
         return (
           <div>
           <MapContainer className="map" center={[52.45905,13.01582]} zoom={9}>

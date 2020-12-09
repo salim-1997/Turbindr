@@ -78,7 +78,12 @@ class Karte extends Component {
   }  
     
     render(){
-       //console.log(this.state.positions[0].Longitude); //hier funktioniert es nicht(TypeError: Cannot read property 'Longitude' of undefined)
+        // Zusatz Herr Trzewik - START
+        console.log(this.state); // sollte nach Ihren Angaben funktionieren und
+        console.log(this.state.positions); // wahrscheinlich ist dieses Objekt nicht initialisiert... Warum nicht?
+        // Zusatz Herr Trzewik - END
+
+        console.log(this.state.positions[0].Longitude); //hier funktioniert es nicht(TypeError: Cannot read property 'Longitude' of undefined)
         return (
           <div>
           <MapContainer className="map" center={[52.45905,13.01582]} zoom={this.state.zoom}>

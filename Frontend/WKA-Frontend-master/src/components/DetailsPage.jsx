@@ -1,6 +1,7 @@
 import React from "react";
 import "./DetailsPage.css"
 function DetailsPage(){
+  
     return <table>
     <tr>
       <th>Betreiber</th>

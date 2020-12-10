@@ -53,9 +53,11 @@ function Karte(props) {
    function createMarker(marker){
       if (marker["Status,C,20"] === props.status){
    
-      return <Marker onClick={()=>{console.log(marker.Latitude)}}position = {[marker.Latitude, marker.Longitude]} icon={grenIcon} >
+      return <Marker eventHandlers={{
+        click: () => {
+          console.log(marker._id);props.clickedId =  marker._id} } } position = {[marker.Latitude, marker.Longitude]} icon={grenIcon} >
                <Popup>
-               Selected !
+               Selected!
                </Popup>
              </Marker>
       }}

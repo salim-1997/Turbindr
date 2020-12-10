@@ -1,5 +1,6 @@
 import React , {useState , useEffect} from "react";
 import axios from "axios";
+import Karte from "./Map";
 import "./DetailsPage.css"
 function DetailsPage(props){
   const[wkaInfo, setWkaInfo] = useState({
@@ -41,7 +42,7 @@ Longitude: 13.42037676,
         alert("data haven't been received!" )
       })
    },[]);
-   
+   <Map onclicked={useEffect} />
     return <table>
     <tr>
       <th>Betreiber</th>

@@ -3,7 +3,7 @@ import L from 'leaflet';
 import {MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import axios from "axios";
 import NaviBar from "./NaviBar";
-import leafGreen from '../assets/leaf-green.png';
+import leafGreen from '../assets/turbine.png';
 import leafRed from '../assets/leaf-red.png';
 import leafOrange from '../assets/leaf-orange.png';
 import leafShadow from '../assets/leaf-shadow.png';
@@ -26,9 +26,9 @@ function Karte(props) {
     const grenIcon = L.icon({
       iconUrl: leafGreen,
       shadowUrl: leafShadow,
-      iconSize:     [38, 95], // size of the icon
-      shadowSize:   [50, 64], // size of the shadow
-      iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+      iconSize:     [18, 24], // size of the icon
+      shadowSize:   [0, 0], // size of the shadow
+      iconAnchor:   [18, 24], // point of the icon which will correspond to marker's location
       shadowAnchor: [4, 62],  // the same for the shadow
       popupAnchor:  [-3, -76]
     });

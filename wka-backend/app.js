@@ -16,7 +16,11 @@ const wkaSchema = new mongoose.Schema({
 { collection : 'wka' });
 
 const Wka = mongoose.model('Wka', wkaSchema);
-
+app.get('/secStat', async function(req,res){
+    Wka.find({},{"Nabenhoehe,N,11,2":1 , "Rotordurch,N,11,2":1},function(err,foundItems){
+        res.send(foundItems);
+   });
+});
 app.get('/coordinates', async function(req,res){
     Wka.find({},{_id: 1, Longitude :1 ,Latitude:1, "Status,C,20": 1},function(err,foundItems){
         res.send(foundItems);

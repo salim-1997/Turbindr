@@ -84,7 +84,19 @@ function Karte(props) {
                Selected!
                </Popup>
              </Marker>
-      }}
+      }
+      else if (marker["Status,C,20"] !== props.status){
+        if (props.status <= "alle") {
+
+       return <Marker eventHandlers={{
+         click: () => {setClickedOn(marker._id);console.log(wkaInfo)}} } key ={marker._id} position = {[marker.Latitude, marker.Longitude]} icon={grenIcon} >
+                <Popup>
+                Selected!
+                </Popup>
+              </Marker>
+     
+       }
+    }}
         return (
           <div>
           

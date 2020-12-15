@@ -7,6 +7,10 @@
     "start": "node bin/www",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "devDependencies": {
+    "sonarqube-scanner": "^2.5.0"
+  },
+
   "author": "",
   "license": "ISC",
   "description": "",

@@ -42,7 +42,6 @@ Longitude: 13.42037676,
         alert("data haven't been received!" )
       })
    },[]);
-   <Karte onclicked={useEffect} />
     return <table>
     <tr>
       <th>Betreiber</th>

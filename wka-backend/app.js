@@ -21,6 +21,11 @@ app.get('/secStat', async function(req,res){
         res.send(foundItems);
    });
 });
+app.get('/thirdStat', async function(req,res){
+    Wka.find({},{"PLZ,C,5":1 , "Leistung,N,13,3":1},function(err,foundItems){
+        res.send(foundItems);
+   });
+});
 app.get('/coordinates', async function(req,res){
     Wka.find({},{_id: 1, Longitude :1 ,Latitude:1, "Status,C,20": 1},function(err,foundItems){
         res.send(foundItems);

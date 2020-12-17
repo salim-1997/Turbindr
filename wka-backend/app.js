@@ -16,6 +16,14 @@ const wkaSchema = new mongoose.Schema({
 { collection : 'wka' });
 
 const Wka = mongoose.model('Wka', wkaSchema);
+
+app.get('/firstStat', async function(req,res){
+    Wka.find({},{"Leistung,N,13,3":1 , "Inbetriebn,D":1},function(err,foundItems){
+        res.send(foundItems);
+   });
+});
+
+
 app.get('/secStat', async function(req,res){
     Wka.find({},{"Nabenhoehe,N,11,2":1 , "Rotordurch,N,11,2":1},function(err,foundItems){
         res.send(foundItems);

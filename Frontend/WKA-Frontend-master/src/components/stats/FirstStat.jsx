@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Scatter} from 'react-chartjs-2';
 import axios from 'axios';
+import moment from 'moment';
 import '../StatisticsPage.css';
 
 function replaceComma (point){
@@ -21,7 +22,12 @@ return newLeistung;
 }
 
 function DateConverter (point) {
-  var day1;
+
+    // das sollte ihr aktuell gewünchtes Format liefern - hier müßten Sie jetzt wieterarbeiten
+    // TODO --> Turbindr --> Datumsformate...
+    return moment(point, "DD.MM.YYYY").format("DDMMYYYY")
+
+/*  var day1;
   var day2;
   var month1;
   var month2;
@@ -59,6 +65,7 @@ function DateConverter (point) {
 
 }
 return year1 + year2 + year3 + year4 + month1 + month2 + day1 +day2;
+*/
 }
 
 function FirstStat(){

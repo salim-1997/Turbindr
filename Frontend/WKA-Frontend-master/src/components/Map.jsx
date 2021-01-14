@@ -7,8 +7,8 @@ import leafGreen from '../assets/turbine.png';
 import leafRed from '../assets/leaf-red.png';
 import leafOrange from '../assets/leaf-orange.png';
 import leafShadow from '../assets/leaf-shadow.png';
-import DetailsPage from "./DetailsPage";
 import {BrowserRouter as Router ,Switch ,Route } from "react-router-dom";
+import "./DetailsPage.css"
 import "./Map.css";
 function Karte(props) {
    const[positions, setPositions] = useState([]);

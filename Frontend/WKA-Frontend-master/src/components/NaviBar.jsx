@@ -2,6 +2,7 @@ import React from "react";
 import "./NaviBar.css";
 import { Link } from "react-router-dom";
 function NaviBar(){
+  /*navigation bar with buttons to link to different page*/
   return  (
   <div>
   <div className="topnav">

@@ -3,8 +3,9 @@ import Karte from "./Map";
 import "./SortierPanel.css"
 
 function SortierPanel(){
+  /*set the state of the chosen panel*/
   const [radio, setRadio] = useState("gnehmigte");
-
+  /*function to change the status of the map whenever the selected category is changed*/
   function handleChange(){
    if (radio === "gnehmigte"){
       return "im Gen.Verf.";

@@ -11,8 +11,10 @@ import {BrowserRouter as Router ,Switch ,Route } from "react-router-dom";
 import "./DetailsPage.css"
 import "./Map.css";
 function Karte(props) {
+  /*useState to put and modify the fetched Data in the "positions"*/ 
    const[positions, setPositions] = useState([]);
    var [clickedOn,setClickedOn] = useState("");
+   /*useEffect to fetch data from Backend */
    useEffect(() =>{
     axios.get('/coordinates')
       .then((res) =>{
@@ -32,6 +34,7 @@ function Karte(props) {
       shadowAnchor: [4, 62],  // the same for the shadow
       popupAnchor:  [-3, -76]
     });
+    /*when the click function is triggered , the REST API will fetch the chosen WKA infos and then display them in the table*/
     const[wkaInfo, setWkaInfo] = useState({
       _id: "5f7249efabc82db972909544",
       "Betreiber,C,120": "Dezentrale Energie Anlagen zweite GmbH & Co. Windpark Oyten 3 KG",
@@ -60,7 +63,7 @@ function Karte(props) {
       "Stand_Abw,N,11,2": -99,
       "Wka_ID,C,15": 106528400006001
         });
-        
+        /*useEffect to fetch the data of a given wka ID from the REST API*/
          useEffect(() =>{
           axios.get('/' + clickedOn )
             .then((response) =>{
@@ -74,8 +77,9 @@ function Karte(props) {
          },[clickedOn]);
     
 
-  
+   /*this function is responsible for creating marker of WKA using the coordinates from DB*/
    function createMarker(marker){
+     /*filter marker if it meets the status of the WKA*/
       if (marker["Status,C,20"] === props.status){
       
       return <Marker eventHandlers={{
@@ -97,6 +101,7 @@ function Karte(props) {
      
        }
     }}
+        /*create map*/      
         return (
           <div>
           
@@ -105,7 +110,8 @@ function Karte(props) {
               attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-            {positions.map(createMarker)}
+            
+            {/* map the received data and use the function createmarker for every element*/ positions.map(createMarker)}
           </MapContainer>
           
           <table>

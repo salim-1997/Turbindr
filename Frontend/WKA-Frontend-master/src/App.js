@@ -11,6 +11,7 @@ import {BrowserRouter as Router ,Switch ,Route } from "react-router-dom";
 
 function App() {
   return (
+    /*routing schema for the different pages in the Web App*/
   <div>
    <Router>
     <NaviBar />

@@ -4,19 +4,19 @@ import axios from 'axios';
 import moment from 'moment';
 import '../StatisticsPage.css';
 
+
 function replaceComma (point){
+
    var newLeistung = point;
+   newLeistung.replace(/,/g,'.');
+/*for (var i = 0; i < point.lenght; i++){
 
-for (var i = 0; i < point.lenght; i++){
+  if (point.charAt(i) ==","){
 
-  if (point.charAt(i) ===","){
-
-     newLeistung[i] = ".";
+     newLeistung.replace(/,/g,'.');
   }
-  else {
-     newLeistung[i] = point.charAt(i);
-  }
-}
+  
+}*/
 return newLeistung;
 
 }
@@ -25,7 +25,7 @@ function DateConverter (point) {
 
     // das sollte ihr aktuell gewünchtes Format liefern - hier müßten Sie jetzt wieterarbeiten
     // TODO --> Turbindr --> Datumsformate...
-    return moment(point, "DD.MM.YYYY").format("DDMMYYYY")
+    return moment(point, "DD.MM.YYYY").format('YYYYMMDD')
 
 /*  var day1;
   var day2;
@@ -85,7 +85,7 @@ function FirstStat(){
        function createPoints(point){
           var obj = {
             x: DateConverter(point["Inbetriebn,D"]), 
-            y: parseFloat(point["Leistung,N,13,3"])
+            y: parseFloat(point["Leistung,N,13,3"].toString().replaceAll(',', '.'))
           }
           if (obj.x == 0){
             return;

@@ -8,15 +8,15 @@ import '../StatisticsPage.css';
 function replaceComma (point){
 
    var newLeistung = point;
-
-for (var i = 0; i < point.lenght; i++){
+   newLeistung.replace(/,/g,'.');
+/*for (var i = 0; i < point.lenght; i++){
 
   if (point.charAt(i) ==","){
 
      newLeistung.replace(/,/g,'.');
   }
   
-}
+}*/
 return newLeistung;
 
 }
@@ -85,7 +85,7 @@ function FirstStat(){
        function createPoints(point){
           var obj = {
             x: DateConverter(point["Inbetriebn,D"]), 
-            y: parseFloat(point["Leistung,N,13,3"])
+            y: parseFloat(point["Leistung,N,13,3"].toString().replaceAll(',', '.'))
           }
           if (obj.x == 0){
             return;

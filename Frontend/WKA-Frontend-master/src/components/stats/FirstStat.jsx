@@ -4,18 +4,18 @@ import axios from 'axios';
 import moment from 'moment';
 import '../StatisticsPage.css';
 
+
 function replaceComma (point){
+
    var newLeistung = point;
 
 for (var i = 0; i < point.lenght; i++){
 
-  if (point.charAt(i) ===","){
+  if (point.charAt(i) ==","){
 
-     newLeistung[i] = ".";
+     newLeistung.replace(/,/g,'.');
   }
-  else {
-     newLeistung[i] = point.charAt(i);
-  }
+  
 }
 return newLeistung;
 
@@ -25,7 +25,7 @@ function DateConverter (point) {
 
     // das sollte ihr aktuell gewünchtes Format liefern - hier müßten Sie jetzt wieterarbeiten
     // TODO --> Turbindr --> Datumsformate...
-    return moment(point, "DD.MM.YYYY").format("DDMMYYYY")
+    return moment(point, "DD.MM.YYYY").format('YYYYMMDD')
 
 /*  var day1;
   var day2;

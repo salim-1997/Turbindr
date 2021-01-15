@@ -2,9 +2,12 @@ import React, {useEffect, useState} from 'react';
 import {Scatter} from 'react-chartjs-2';
 import axios from 'axios';
 import '../StatisticsPage.css';
+import moment from 'moment';
 
-function SecondStat(){
-    var [points,setPoints] = useState([]); 
+function SecondStat(props){
+    var [points,setPoints] = useState([]);
+    var startDate = moment(props.fromDate, "DD/MM/YYYY");
+    var endDate = moment(props.toDate, "DD/MM/YYYY");
     useEffect(() =>{
         axios.get('/secStat')
           .then((res) =>{
@@ -17,12 +20,14 @@ function SecondStat(){
           })
        },[]);
        function createPoints(point){
+          var m = moment(point["Inbetriebn,D"], "DD.MM.YYYY");
+          if ( m.isBefore(endDate) && m.isAfter(startDate)){
           var obj = {
             x: point["Nabenhoehe,N,11,2"],
             y: point["Rotordurch,N,11,2"]
           }
           return obj;
-        }
+        }}
  return <div style={{height:"700px",width:"70%",
     margin:"0 auto"
     }}>

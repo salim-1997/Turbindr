@@ -14,6 +14,7 @@ mongoose.connection.on('connected',() =>{
 const wkaSchema = new mongoose.Schema({
     Latitude: Number,
     Longitude: Number,
+    "Inbetriebn,D": String,
 },
 { collection : 'wka' });
 
@@ -29,7 +30,7 @@ app.get('/firstStat', async function(req,res){
 
 /*get request for second Statistic*/
 app.get('/secStat', async function(req,res){
-    Wka.find({},{"Nabenhoehe,N,11,2":1 , "Rotordurch,N,11,2":1},function(err,foundItems){
+    Wka.find({},{"Nabenhoehe,N,11,2":1 , "Rotordurch,N,11,2":1, "Inbetriebn,D":1},function(err,foundItems){
         res.send(foundItems);
    });
 });

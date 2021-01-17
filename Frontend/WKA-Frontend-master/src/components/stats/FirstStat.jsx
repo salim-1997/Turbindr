@@ -1,152 +1,124 @@
-import React, {useEffect, useState} from 'react';
-import {Scatter} from 'react-chartjs-2';
+import React, { useEffect, useState } from 'react';
+import { Line, Scatter } from 'react-chartjs-2';
 import axios from 'axios';
 import moment from 'moment';
 import '../StatisticsPage.css';
 import { Point } from 'leaflet';
 
-var i = 0;
+
 var PointList = new Array();
 
 
 
+function FirstStat() {
+  var [points, setPoints] = useState([]);
+  useEffect(() => {
+    axios.get('/firstStat')
+      .then((res) => {
+        setPoints(res.data);
+        console.log('succes: data has been received');
+
+      })
+      .catch(() => {
+        alert("no data received!")
+      })
+  }, []);
 
 
-
-function compareFunction(a, b)
-/*vergleicht die Datumswerte der Wkas für die Sort-Funktion */
-{
-  if (a.x === b.x){
-    return 0;
+  function Crawl(point) {
+    /*Erstellt für einen Punkt ein Objekt mit x und y Werten (x=Datum, y=Leistung) und gibt Objekt zurück */
+    var obj = {
+      x: DateConverter(point["Inbetriebn,D"]),
+      y: parseFloat(point["Leistung,N,13,3"].toString().replaceAll(',', '.'))
+    }
+    if (obj.x == 0) {
+      return;
+    }
+    else {
+      return obj;
+    }
   }
-  else {
-    return (a.x < b.x) ? -1 : 1;
+
+  function addDate(PointList){
+    /* addiert solange Leistungen der Wkas mit demselben Datum, bis keine gleichen Datumswerte mehr vorhanden sind*/
+
+    for(var i=1; i<PointList.length; i++){
+      
+      while(PointList[i] == PointList[i-1]){
+      
+      PointList[i]= sumDate(PointList[i], PointList[i-1]);
+      delete PointList[i-1];
+    }
   }
+  }
+
+
+function sumDate(a,b){
+  /*Addiert Leistungen zweier Wkas mit demselben Datum */
+  return a.y+b.y;
 }
+  function LeistungsSumme(PointList)
+       /* Addiert die Leistungen der nach Datum sortierten Wkas und gibt PointList zurück*/ {
+    addDate(PointList);
+    for (var i = 1; i < PointList.length; i++) {
 
-function DateConverter(point) {
-  // das sollte ihr aktuell gewünchtes Format liefern - hier müßten Sie jetzt wieterarbeiten
-  // TODO --> Turbindr --> Datumsformate...
-  return moment(point, "DD.MM.YYYY").format("YYYYMMDD");
+      PointList[i].y = PointList[i].y + PointList[i - 1].y
+    }
 
+    return PointList;
+  }
 
+  function compareFunction(a, b)
+/*vergleicht die Datumswerte der Wkas für die Sort-Funktion */ {
+    if (a.x === b.x) {
+      return 0;
+    }
+    else {
+      return (a.x < b.x) ? -1 : 1;
+    }
+  }
 
-}
+  function DateConverter(point) {
+    // das sollte ihr aktuell gewünschtes Format liefern - hier müßten Sie jetzt weiterarbeiten
+    // TODO --> Turbindr --> Datumsformate...
+    return moment(point, "DD.MM.YYYY").format("YYYYMMDD");
 
+  }
 
-function FirstStat(){
-    var [points,setPoints] = useState([]); 
-    useEffect(() =>{
-        axios.get('/firstStat')
-          .then((res) =>{
-          setPoints(res.data);
-          console.log('succes: data has been received');
-         
-          })
-          .catch(() => {
-            alert("data haven't been received!" )
-          })
-       },[]);
+  function DateMePlz(PointList){
+    /* Formatiert Datum von Integer in Datum */
+    for(var i=0; i<PointList.length; i++){
+      PointList[i].x = moment(PointList[i].x, "YYYYMMDD").format("DDMMYYYY");
+    }
+    
+    return PointList;
+  }
 
-       function LeistungsSumme(PointList) 
-       /* Addiert die Leistungen der nach Datum sortierten Wkas*/
-       {
-          PointList.forEach(element => {
-            for (var i=1; i<PointList.length; i++){
-              PointList[i].y = PointList[i].y + PointList[i-1].y;
-            }
-          });
-       }
-
-       function Gesamtleistung(obj){ //erstellt Liste der Punkte mit Leistung und Datum nach Datum sortiert und mit Leistung addiert in 2DArray
-        if (obj == 0){
-          return PointList;
+  return <div style={{
+    height: "700px", width: "70%",
+    margin: "0 auto"
+  }}>
+    <Scatter
+      className="scatter"
+      options={{
+        title: {
+          display: true,
+          text: "Leistung über Zeit",
+          fontSize: 25
         }
-        else
-        {
+      }}
 
-          PointList.push(obj);
-          PointList.sort(compareFunction);
-          LeistungsSumme(PointList);
+      data={{
+        datasets: [{
+          label: 'WKA',
+          data: LeistungsSumme(points.map(Crawl).sort(compareFunction)),
+          //LeistungsSumme(points.map(Crawl).sort(compareFunction)), //erstellt Punkte für die Statistik
 
-        /*var ObjArray = [obj.x, obj.y];
-        PointList.push(ObjArray);
-        PointList.sort(compareFunction);
-
-        PointList.forEach(element => {
-          for (var i=1; i< PointList.length-1; i++){
-            PointList[i][1] = PointList[i][1]+ PointList[i-1][1];
-          }
-        });*/
-        return PointList;
-      }
-       }
-
-
-
-       function Crawl(point){     //soll die Punkte einzeln returnen
-        var obj =  {
-          x: DateConverter(point["Inbetriebn,D"]), 
-          y: parseFloat(point["Leistung,N,13,3"].toString().replaceAll(',', '.'))
-        }
-        if (obj.x == 0){
-          return 0;
-       }
-       else{
-         return obj;
-       }
-       }
-
-
-       function createPoints(point){  
-      /*soll die fertige Liste von Punkten returnen*/
-                   
-         
-          if (i < 200 ){ /*stellt Abbruchbedingung dar (Prototyp)*/
-            Gesamtleistung(Crawl(point));
-            i++;
-            return;
-          }
-          else { //wenn keine neuen Punkte mehr vorhanden sind, soll PointList ausgegeben werden
-            if (PointList.length > 0){
-
-            
-            /*var p = PointList.pop(); 
-            var objp =  {
-              x: p[0],
-              y: p[1]
-            }*/
-          
-          return PointList;
-          }
-           else{
-
-             return;
-
-           }
-          }
-        }
- return <div style={{height:"700px",width:"70%",
-    margin:"0 auto"
-    }}>
- <Scatter
-className="scatter"
-options = 	{{ 
-			title:{
-                display : true,
-				        text: "Leistung über Zeit",
-                fontSize: 25}
-            }}
-            
-data={{
-    datasets: [{
-            label: 'WKA',
-            data: points.map(createPoints), //erstellt Punkte für die Statistik
-            backgroundColor: "red"
+          backgroundColor: "red"
         }]
- }}
-  />
-   </div>
+      }}
+    />
+  </div>
 }
 
 export default FirstStat;

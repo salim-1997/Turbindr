@@ -21,7 +21,7 @@ stage ('Build') {
                     maven: 'maven-3',
                     mavenOpts: '-Xmx1024m', 
                     options: [artifactsPublisher(disabled: true),
-                            jacocoPublisher(disabled: true)],
+                            jacocoPublisher(disabled: false)],
                     jdk: 'openjdk1.8'
                     )
             {

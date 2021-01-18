@@ -86,30 +86,7 @@ proceeding
     }
 }
 
-stage ('SonarTest') {
 
-    node {
-
-
-        checkout scm
-
-        try {
-
-            sh 'npm run test --coverage --watchAll'
-            echo "\u2713 success"
-            currentBuild.result = 'SUCCESS'
-
-        } catch (any) {
-            echo "\u274C failure"
-            currentBuild.result = 'FAILURE'
-            throw any //rethrow exception to prevent the build from
-proceeding
-        } finally {
-            mail()
-        }
-
-    }
-}
 
 }
 }

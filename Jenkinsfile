@@ -44,8 +44,8 @@ stage ('Test') {
 
         try {
 
-            sh 'npm run test --coverage --watchAll'
-
+            
+            sh 'npm test -- --code-coverage --watch=false --browsers=ChromeHeadless'
             echo "\u2713 success"
             currentBuild.result = 'SUCCESS'
 
@@ -96,7 +96,7 @@ stage ('SonarTest') {
 
         try {
 
-            sh 'npm run sonar-scanner'
+            sh 'npm run test --coverage --watchAll'
 
             echo "\u2713 success"
             currentBuild.result = 'SUCCESS'

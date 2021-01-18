@@ -32,9 +32,7 @@
     "test": "react-scripts test",
     "coverage:dev": "react-scripts test --coverage --watchAll",
     "coverage:prod": "react-scripts test --coverage",
-
     "eject": "react-scripts eject"
-
   },
   "eslintConfig": {
     "extends": [
@@ -54,8 +52,7 @@
       "last 1 safari version"
     ]
   },
-
-"jest": {
+  "jest": {
     "collectCoverageFrom": [
       "**/*.{js,jsx}",
       "!coverage/**",
@@ -74,9 +71,6 @@
       "cobertura"
     ]
   },
-  
-
-
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
   "main": "index.js",
   "devDependencies": {},

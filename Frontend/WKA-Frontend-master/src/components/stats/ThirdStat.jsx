@@ -72,9 +72,36 @@ function ThirdStat() {
         {points.map(addLeistungOrElement)}{console.log(plz)}{console.log(leistung)}
 
         <Bar
+         options={{
+            title: {
+              display: true,
+              text: "Leistung der WKA in Postleitzahlen",
+              fontSize: 25,
+            },
+            scales: {
+              yAxes:[{
+                scaleLabel: {
+                  display: true,
+                  labelString: 'Leistung (Megawatt)'
+                },
+          
+              }],
+              xAxes: [{
+                scaleLabel: {
+                  display: true,
+                
+                  labelString: 'Postleitzahl',
+                 
+                  
+                },
+                
+            }]}
+        }
+    }
             data={{
                 labels:  [sortedPlz[0], sortedPlz[1], sortedPlz[2], sortedPlz[3], sortedPlz[4], sortedPlz[5], sortedPlz[6], sortedPlz[7], sortedPlz[8], sortedPlz[9]],
                 datasets: [{
+                    label: "Gesamtleistung der WKA",
 
                     data: sortLeistung(),
                     backgroundColor: [

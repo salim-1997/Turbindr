@@ -51,6 +51,25 @@ function SecondStat(props) {
             text: "Nabenhöhe vs. Rotordurchmesser",
             fontSize: 25,
           },
+          scales: {
+            yAxes:[{
+              scaleLabel: {
+                display: true,
+                labelString: 'Rotordurchmesser (Meter)'
+              },
+        
+            }],
+            xAxes: [{
+              scaleLabel: {
+                display: true,
+              
+                labelString: 'Nabenhöhe (Meter)',
+               
+                
+              },
+              
+          }]
+        }
         }}
         data={{
           datasets: [

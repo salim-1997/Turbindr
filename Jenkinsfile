@@ -71,6 +71,7 @@ stage ('Sonar') {
         try {
 
             sh 'npm run sonar-scanner'
+
             echo "\u2713 success"
             currentBuild.result = 'SUCCESS'
 
@@ -85,8 +86,6 @@ proceeding
 
     }
 }
-
-
 
 }
 }

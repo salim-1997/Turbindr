@@ -29,10 +29,13 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "postbuild": "rimraf build/**/*.map",
-    "test": "react-scripts test",
+    //"test": "react-scripts test",
+    "test": "react-scripts test --env=jsdom",
+    //"test":"jest --coverage --coverageDirectory=output/coverage/jest",
     "coverage:dev": "react-scripts test --coverage --watchAll",
     "coverage:prod": "react-scripts test --coverage",
     "eject": "react-scripts eject"
+    
   },
   "eslintConfig": {
     "extends": [

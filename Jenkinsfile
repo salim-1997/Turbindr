@@ -44,7 +44,7 @@ stage ('Test') {
 
         try {
 
-            sh 'npm test -- --code-coverage --watch=true --browsers=ChromeHeadless'
+            sh 'npm run test --coverage --watchAll'
 
             echo "\u2713 success"
             currentBuild.result = 'SUCCESS'

@@ -21,6 +21,9 @@ function SecondStat(){
             x: point["Nabenhoehe,N,11,2"],
             y: point["Rotordurch,N,11,2"]
           }
+          if (obj.x == 0){
+            return;
+          }
           return obj;
         }
  return <div style={{height:"700px",width:"70%",
@@ -28,18 +31,41 @@ function SecondStat(){
     }}>
  <Scatter
 className="scatter"
-options = 	{{ 
-			title:{
-                display : true,
-				        text: "Nabenhöhe vs. Rotordurchmesser",
-                fontSize: 25}
-            }}
+options={{
+        
+  title: {
+    display: true,
+    text: "Nabenhöhe vs. Rotordurchmesser",
+    fontSize: 25
+  },
+  scales: {
+    yAxes:[{
+      scaleLabel: {
+        display: true,
+        labelString: 'Rotordurchmesser (Meter)'
+      },
+
+    }],
+    xAxes: [{
+      scaleLabel: {
+        display: true,
+      
+        labelString: 'Nabenhöhe (Meter)',
+       
+        
+      },
+      
+  }]
+  }
+}}
+
+
             
 data={{
     datasets: [{
             label: 'WKA',
             data: points.map(createPoints),
-            backgroundColor: "red"
+            backgroundColor: "blue"
         }]
  }}
   />

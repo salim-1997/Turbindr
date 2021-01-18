@@ -28,6 +28,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "postbuild": "rimraf build/**/*.map",
     "test": "react-scripts test",
     "coverage:dev": "react-scripts test --coverage --watchAll",
     "coverage:prod": "react-scripts test --coverage",
@@ -73,6 +74,7 @@
       "cobertura"
     ]
   },
+  
 
 
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",

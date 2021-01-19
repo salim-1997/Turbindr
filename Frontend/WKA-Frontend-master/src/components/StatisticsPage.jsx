@@ -16,8 +16,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 //import "pure-react-carousel/dist/react-carousel.es.css";
 
 function StatisticsPage() {
-  const [startDate, setStartDate] = useState(new Date(2005, 1, 1));
-  const [endDate, setEndDate] = useState(new Date(2015, 1, 1));
+  const [startDate, setStartDate] = useState(new Date(2015, 0, 1));
+  const [endDate, setEndDate] = useState(new Date(2020, 0, 1));
   const [value, setValue] = useState("inBetriebsnahme");
   const handleChange = (event) => {
     setValue(event.target.value);
@@ -34,12 +34,12 @@ function StatisticsPage() {
         <FormControlLabel
           value="inBetriebsnahme"
           control={<Radio />}
-          label="in Betriebsnahme"
+          label="WKA in Betrieb"
         />
         <FormControlLabel
           value="genehmigt"
           control={<Radio />}
-          label="genehmigt"
+          label="genehmigte WKA"
         />
       </RadioGroup>
       <DatePicker
@@ -50,7 +50,7 @@ function StatisticsPage() {
 
       <Carousel interval={7000}>
         <Carousel.Item>
-          <FirstStat />
+          <FirstStat fromDate={startDate} toDate={endDate} status={value}/>
           <Carousel.Caption>
             <h3>First slide label</h3>
             <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>

@@ -10,7 +10,9 @@ var PointList = new Array();
 
 
 
-function FirstStat() {
+function FirstStat(props) {
+  var startDate = moment(props.fromDate, "DD/MM/YYYY");
+  var endDate = moment(props.toDate, "DD/MM/YYYY");
   var [points, setPoints] = useState([]);
   useEffect(() => {
     axios.get('/firstStat')
@@ -131,7 +133,8 @@ function FirstStat() {
             type: 'time',
             time: {
               unit: 'year',
-              min: '1993-01-01'
+              min: moment(startDate,"DD/MM/YYYY" ).format("YYYY-MM-DD"), 
+              max: moment(endDate,"DD/MM/YYYY" ).format("YYYY-MM-DD")
             }
 
           }]

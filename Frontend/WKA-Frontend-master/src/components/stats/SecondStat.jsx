@@ -37,7 +37,15 @@ function SecondStat(props) {
           x: point["Nabenhoehe,N,11,2"],
           y: point["Rotordurch,N,11,2"],
         };
+        if(obj.x ==0){
+          return;
+        }
+        if(obj.y ==0){
+          return;
+        }
+        else{
         return obj;
+        }
       }
     }
   }

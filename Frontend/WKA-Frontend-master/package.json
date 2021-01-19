@@ -29,8 +29,6 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "coverage:dev": "react-scripts test --coverage --watchAll",
-    "coverage:prod": "react-scripts test --coverage",
     "eject": "react-scripts eject"
     
   },
@@ -52,27 +50,7 @@
       "last 1 safari version"
     ]
   },
-  "jest": {
-    "collectCoverageFrom": [
-      "**/*.{js,jsx}",
-      "!coverage/**",
-      "!node_modules/**",
-      "!src/index.js",
-      "!src/setupTests.js",
-      "!public/**",
-      "!build/**",
-      "text",
-      "cobertura"
-    ],
-    "coverageReporters": [
-      "text",
-      "lcov",
-      "json",
-      "text",
-      "clover",
-      "cobertura"
-    ]
-  },
+  
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
   "main": "index.js",
   "devDependencies": {},

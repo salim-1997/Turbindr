@@ -1,147 +1,147 @@
-import React, { useEffect, useState } from 'react';
-import { Bar } from 'react-chartjs-2';
-import axios from 'axios';
-import { Point } from 'leaflet';
+import React, { useEffect, useState } from "react";
+import { Bar } from "react-chartjs-2";
+import axios from "axios";
+import { Point } from "leaflet";
 
 var UnsortedLeistung = new Array();
 
-
-
 function ThirdStat() {
-   
-
-    var [points, setPoints] = useState([]);
-    var [plz, setPlz] = useState([]);
-    var [leistung, setLeistung] = useState([]);
-    var [sorted, setSorted] = useState([]);
-    useEffect(() => {
-        axios.get('/thirdStat')
-            .then((res) => {
-                setPoints(res.data);
-                console.log('succes: data has been received');
-            })
-            .catch(() => {
-                alert("data haven't been received!")
-            })
-    }, []);
-   function addLeistungOrElement(element) {
-        const cePlz = parseFloat(element["PLZ,C,5"]);
-        const ceLeistung = parseFloat(element["Leistung,N,13,3"]);
-        if (plz.includes(cePlz)) {
-            const index = plz.indexOf(cePlz);
-            leistung[index] += ceLeistung;
-
-        }
-        else {
-            plz.push(cePlz);
-            leistung.push(ceLeistung);
-        }
+  var [points, setPoints] = useState([]);
+  var [plz, setPlz] = useState([]);
+  var [leistung, setLeistung] = useState([]);
+  useEffect(() => {
+    axios
+      .get("/thirdStat")
+      .then((res) => {
+        setPoints(res.data);
+        console.log("succes: data has been received");
+      })
+      .catch(() => {
+        alert("data haven't been received!");
+      });
+  }, []);
+  function addLeistungOrElement(element) {
+    const cePlz = parseFloat(element["PLZ,C,5"]);
+    const ceLeistung = parseFloat(element["Leistung,N,13,3"]);
+    if (plz.includes(cePlz)) {
+      const index = plz.indexOf(cePlz);
+      leistung[index] += ceLeistung;
+    } else {
+      plz.push(cePlz);
+      leistung.push(ceLeistung);
     }
+  }
 
+  function sortLeistung() {
+    leistung.sort((a, b) => b - a);
+    return leistung;
+  }
 
-    function sortLeistung(){
-        leistung.sort((a, b) => b - a);
-        return leistung;
+  function sortPlz() {
+    UnsortedLeistung = leistung;
+    var newPlz = new Array();
+    var obj = new Array();
+    sortLeistung();
+    for (var i = 0; i < UnsortedLeistung.length; i++) {
+      var elementLeistung = leistung[i];
+      var Index = UnsortedLeistung.indexOf(elementLeistung);
+      newPlz[i] = plz[Index];
     }
+    return newPlz;
+  }
 
-   
-    function sortPlz(){
-        UnsortedLeistung=leistung;
-        var newPlz = new Array();
-        var obj = new Array();
-        sortLeistung();
-        for (var i = 0; i< UnsortedLeistung.length; i++){
+  var sortedPlz = sortPlz();
 
-            var elementLeistung = leistung[i];
-            var Index = UnsortedLeistung.indexOf(elementLeistung);
-            newPlz[i] = plz[Index];
-           
-        }
-        return newPlz;
-    }
-    
+  return (
+    <div
+      style={{
+        height: "700px",
+        width: "70%",
+        margin: "0 auto",
+      }}
+    >
+      {points.map(addLeistungOrElement)}
+      {console.log(sortLeistung())}
 
+      <Bar
+        options={{
+          title: {
+            display: true,
+            text: "Leistung der WKA in Postleitzahlen",
+            fontSize: 25,
+          },
+          scales: {
+            yAxes: [
+              {
+                scaleLabel: {
+                  display: true,
+                  labelString: "Leistung (Megawatt)",
+                },
+              },
+            ],
+            xAxes: [
+              {
+                scaleLabel: {
+                  display: true,
 
-    var sortedPlz = sortPlz();   
+                  labelString: "Postleitzahl",
+                },
+              },
+            ],
+          },
+        }}
+        data={{
+          labels: [
+            sortedPlz[0],
+            sortedPlz[1],
+            sortedPlz[2],
+            sortedPlz[3],
+            sortedPlz[4],
+            sortedPlz[5],
+            sortedPlz[6],
+            sortedPlz[7],
+            sortedPlz[8],
+            sortedPlz[9],
+          ],
+          datasets: [
+            {
+              label: "Gesamtleistung der WKA",
 
-
-    return <div style={{
-        height: "700px", width: "70%",
-        margin: "0 auto"
-    }}>
-        {points.map(addLeistungOrElement)}{console.log(plz)}{console.log(leistung)}
-
-        <Bar
-         options={{
-            title: {
-              display: true,
-              text: "Leistung der WKA in Postleitzahlen",
-              fontSize: 25,
+              data: sortLeistung(),
+              backgroundColor: [
+                "rgba(255, 99, 132, 0.2)",
+                "rgba(54, 162, 235, 0.2)",
+                "rgba(255, 206, 86, 0.2)",
+                "rgba(75, 192, 192, 0.2)",
+                "rgba(153, 102, 255, 0.2)",
+                "rgba(255, 159, 64, 0.2)",
+                "rgba(255, 99, 132, 0.2)",
+                "rgba(54, 162, 235, 0.2)",
+                "rgba(255, 206, 86, 0.2)",
+                "rgba(75, 192, 192, 0.2)",
+              ],
+              borderColor: [
+                "rgba(255,99,132,1)",
+                "rgba(54, 162, 235, 1)",
+                "rgba(255, 206, 86, 1)",
+                "rgba(75, 192, 192, 1)",
+                "rgba(153, 102, 255, 1)",
+                "rgba(255, 159, 64, 1)",
+                "rgba(255,99,132,1)",
+                "rgba(54, 162, 235, 1)",
+                "rgba(255, 206, 86, 1)",
+                "rgba(75, 192, 192, 1)",
+              ],
+              borderWidth: 1,
             },
-            scales: {
-              yAxes:[{
-                scaleLabel: {
-                  display: true,
-                  labelString: 'Leistung (Megawatt)'
-                },
-          
-              }],
-              xAxes: [{
-                scaleLabel: {
-                  display: true,
-                
-                  labelString: 'Postleitzahl',
-                 
-                  
-                },
-                
-            }]}
-        }
-    }
-            data={{
-                labels:  [sortedPlz[0], sortedPlz[1], sortedPlz[2], sortedPlz[3], sortedPlz[4], sortedPlz[5], sortedPlz[6], sortedPlz[7], sortedPlz[8], sortedPlz[9]],
-                datasets: [{
-                    label: "Gesamtleistung der WKA",
-
-                    data: sortLeistung(),
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(255, 159, 64, 0.2)',
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                    ],
-                    borderColor: [
-                        'rgba(255,99,132,1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)',
-                        'rgba(255,99,132,1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                    ],
-                    borderWidth: 1
-                }]
-            }}
-        />
+          ],
+        }}
+      />
     </div>
+  );
 }
 
 export default ThirdStat;
-
-
-
-
-
-
 
 // function addLeistungOrElement(element){
 //    if (plz.includes(element.plz) ){
@@ -155,8 +155,6 @@ export default ThirdStat;
 // }
 
 // point.map(addLeistungOrElement);
-
-
 
 // function addLeistungOrElement(element){
 //     const cePlz = parseFloat(element["PLZ,C,5"]);

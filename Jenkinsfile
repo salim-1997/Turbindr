@@ -33,6 +33,8 @@ proceeding
         }
 
     }
+    junit '*/build/test-results/*.xml'
+        step( [ $class: 'JacocoPublisher' ] )
 }
 
 stage ('Test') {

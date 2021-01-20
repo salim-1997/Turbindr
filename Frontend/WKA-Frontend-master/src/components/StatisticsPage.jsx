@@ -26,51 +26,46 @@ function StatisticsPage() {
   return (
     <div style={{ textAlign: "center" }}>
       <RadioGroup
+        className="radioGroup"
         aria-label="gender"
         name="gender1"
         value={value}
         onChange={handleChange}
       >
         <FormControlLabel
+          className="radioBox"
           value="inBetriebsnahme"
           control={<Radio />}
           label="in Betriebsnahme"
         />
         <FormControlLabel
+          className="radioBox"
           value="genehmigt"
           control={<Radio />}
           label="genehmigt"
         />
       </RadioGroup>
-      <DatePicker
-        selected={startDate}
-        onChange={(date) => setStartDate(date)}
-      />
-      <DatePicker selected={endDate} onChange={(date) => setEndDate(date)} />
-
+      <div class="container_row">
+        <DatePicker
+          className="datePicker"
+          selected={startDate}
+          onChange={(date) => setStartDate(date)}
+        />
+        <DatePicker
+          className="datePicker"
+          selected={endDate}
+          onChange={(date) => setEndDate(date)}
+        />
+      </div>
       <Carousel interval={7000}>
         <Carousel.Item>
           <FirstStat />
-          <Carousel.Caption>
-            <h3>First slide label</h3>
-            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-          </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
           <SecondStat fromDate={startDate} toDate={endDate} status={value} />
-          <Carousel.Caption>
-            <h3>Second slide label</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
           <ThirdStat />
-          <Carousel.Caption>
-            <h3>Third slide label</h3>
-            <p>
-              Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-            </p>
-          </Carousel.Caption>
         </Carousel.Item>
       </Carousel>
     </div>
@@ -78,27 +73,3 @@ function StatisticsPage() {
 }
 
 export default StatisticsPage;
-
-/*<form  noValidate>
-<TextField 
-id="startDate"
-label="von.."
-type="date"
-defaultValue={startDate}
-onChange={handleChangeStart}
-InputLabelProps={{
-  shrink: true,
-}}
-/>
-<TextField
-id="endDate"
-label="..bis"
-type="date"
-defaultValue={endDate}
-onChange={handleChangeEnd}
-InputLabelProps={{
-  shrink: true,
-}}
-/>
-<Button variant="outlined" onClick={handleClick}>Filter-></Button>
-</form>*/

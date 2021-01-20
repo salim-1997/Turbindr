@@ -3,6 +3,22 @@
   height: 500px;
 }
 
-.Carousel a {
+.Carousel {
   background-color: violet;
+}
+
+.datePicker {
+  margin: 20px;
+  float: left;
+}
+.radioBox,
+.radioGroup {
+  float: left;
+  margin-left: 50px;
+}
+
+.container_row {
+  position: relative;
+  right: 0;
+  top: 20px;
 }

@@ -26,14 +26,14 @@ function Karte(props) {
         alert("data haven't been received!");
       });
   }, []);
-  const grenIcon = L.icon({
-    iconUrl: leafGreen,
+  const orangeIcon = L.icon({
+    iconUrl: leafOrange,
     shadowUrl: leafShadow,
-    iconSize: [18, 24], // size of the icon
-    shadowSize: [0, 0], // size of the shadow
-    iconAnchor: [18, 24], // point of the icon which will correspond to marker's location
+    iconSize: [38, 95], // size of the icon
+    shadowSize: [50, 64], // size of the shadow
+    iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
     shadowAnchor: [4, 62], // the same for the shadow
-    popupAnchor: [-3, -76],
+    popupAnchor: [-3, -86],
   });
   /*when the click function is triggered , the REST API will fetch the chosen WKA infos and then display them in the table*/
   const [wkaInfo, setWkaInfo] = useState({
@@ -94,7 +94,7 @@ function Karte(props) {
           }}
           key={marker._id}
           position={[marker.Latitude, marker.Longitude]}
-          icon={grenIcon}
+          icon={orangeIcon}
         >
           <Popup>Selected!</Popup>
         </Marker>
@@ -111,7 +111,7 @@ function Karte(props) {
             }}
             key={marker._id}
             position={[marker.Latitude, marker.Longitude]}
-            icon={grenIcon}
+            icon={orangeIcon}
           >
             <Popup>Selected!</Popup>
           </Marker>

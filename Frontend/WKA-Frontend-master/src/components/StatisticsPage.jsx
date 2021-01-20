@@ -16,8 +16,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 //import "pure-react-carousel/dist/react-carousel.es.css";
 
 function StatisticsPage() {
-  const [startDate, setStartDate] = useState(new Date(2005, 1, 1));
-  const [endDate, setEndDate] = useState(new Date(2015, 1, 1));
+  const [startDate, setStartDate] = useState(new Date(2016, 0, 1));
+  const [endDate, setEndDate] = useState(new Date(2021, 0, 1));
   const [value, setValue] = useState("inBetriebsnahme");
   const handleChange = (event) => {
     setValue(event.target.value);
@@ -36,13 +36,13 @@ function StatisticsPage() {
           className="radioBox"
           value="inBetriebsnahme"
           control={<Radio />}
-          label="in Betriebsnahme"
+          label="WKA in Betrieb"
         />
         <FormControlLabel
           className="radioBox"
           value="genehmigt"
           control={<Radio />}
-          label="genehmigt"
+          label="genehmigte WKA"
         />
       </RadioGroup>
       <div class="container_row">

@@ -59,7 +59,7 @@ function StatisticsPage() {
       </div>
       <Carousel interval={7000}>
         <Carousel.Item>
-          <FirstStat />
+          <FirstStat fromDate={startDate} toDate={endDate} status={value} />
         </Carousel.Item>
         <Carousel.Item>
           <SecondStat fromDate={startDate} toDate={endDate} status={value} />

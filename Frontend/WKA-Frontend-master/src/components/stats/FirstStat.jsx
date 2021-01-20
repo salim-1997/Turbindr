@@ -11,6 +11,7 @@ var PointList = new Array();
 
 
 function FirstStat(props) {
+  
   var startDate = moment(props.fromDate, "DD/MM/YYYY");
   var endDate = moment(props.toDate, "DD/MM/YYYY");
   var [points, setPoints] = useState([]);
